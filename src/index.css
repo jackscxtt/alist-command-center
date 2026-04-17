@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  background: #040810;
+  color: #e2f0ff;
+  font-family: "Rajdhani", sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 180, 216, 0.25);
+  border-radius: 2px;
+}
+
+textarea,
+input,
+button {
+  outline: none;
+  font-family: inherit;
+}
+textarea::placeholder,
+input::placeholder {
+  color: #3a5470;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.25s ease;
+}
+
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: linear-gradient(rgba(0, 180, 216, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 180, 216, 0.022) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hud-btn {
+  cursor: pointer;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: all 0.15s;
+}
+.hud-btn:hover {
+  opacity: 0.75;
+}
+.hud-btn:active {
+  transform: scale(0.97);
+}
+.hud-btn:disabled {
+  cursor: not-allowed;
+}
+
+.blocker-card:hover {
+  border-color: rgba(245, 158, 11, 0.35) !important;
+}
+.doc-card:hover {
+  border-color: rgba(0, 180, 216, 0.4) !important;
+  background: rgba(0, 180, 216, 0.06) !important;
+}
