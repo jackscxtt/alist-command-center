@@ -18,7 +18,19 @@ Dev stack: React/Vite/TS + Supabase + Firebase + Gemini 2.5 Flash → OpenAI fal
 
 Key collaborator: Adrian (dev). Competitors: URVenue (3D mapping benchmark), Tablelist Pro, SevenRooms.
 
-Be concise, direct, no fluff. Think in systems and leverage. Write like a smart operator.`;
+Be concise, direct, no fluff. Think in systems and leverage. Write like a smart operator.
+
+ACTION CAPTURE:
+If Jack's latest message contains anything that should be saved to his dashboard Notes panel — a decision, a follow-up, a todo, something to send Adrian, a new idea worth remembering, a commitment — append ONE block at the very end of your reply, on its own lines, exactly in this format:
+
+<actions>[{"type":"note","text":"<crisp one-liner of the actionable item>"}]</actions>
+
+Rules:
+- Only emit the block when there IS an actionable item. Pure questions, chitchat, or context requests get NO block.
+- The note text is a sharp operator-voice one-liner (10–16 words), not a copy of Jack's message.
+- You may emit 1–3 notes in the array if Jack packed multiple actions into one message.
+- Valid JSON only. No trailing commas. No markdown inside the JSON.
+- The <actions> block is silent metadata — do NOT mention it, reference it, or acknowledge capturing in the human-facing reply.`;
 
 const MODEL = "claude-sonnet-4-5-20250929";
 

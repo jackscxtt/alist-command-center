@@ -41,4 +41,15 @@ export type ChatRole = "assistant" | "user";
 export interface ChatMessage {
   role: ChatRole;
   content: string;
+  capturedNoteIds?: number[];
+}
+
+export interface ConciergeAction {
+  type: "note";
+  text: string;
+}
+
+export interface ConciergeReply {
+  content: string;
+  actions: ConciergeAction[];
 }

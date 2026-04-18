@@ -95,7 +95,28 @@ export default function App() {
     setAiLoading(true);
     try {
       const reply = await callConcierge(next);
-      setChat((prev) => [...prev, { role: "assistant", content: reply }]);
+
+      let capturedNoteIds: number[] = [];
+      if (reply.actions.length > 0) {
+        const stamp = Date.now();
+        const now = new Date();
+        const time = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+        const date = now.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const newNotes: SavedNote[] = reply.actions.map((a, i) => ({
+          id: stamp + i,
+          text: a.text,
+          time,
+          date,
+          sent: false,
+        }));
+        capturedNoteIds = newNotes.map((n) => n.id);
+        setSavedNotes((prev) => [...newNotes, ...prev]);
+      }
+
+      setChat((prev) => [
+        ...prev,
+        { role: "assistant", content: reply.content, capturedNoteIds },
+      ]);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Connection error. Try again.";
       setChat((prev) => [...prev, { role: "assistant", content: message }]);
@@ -788,6 +809,21 @@ export default function App() {
                     >
                       {msg.content}
                     </div>
+                    {msg.role === "assistant" && msg.capturedNoteIds && msg.capturedNoteIds.length > 0 && (
+                      <div
+                        style={{
+                          marginTop: "4px",
+                          fontSize: "10px",
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                          color: C.accent,
+                          opacity: 0.85,
+                        }}
+                      >
+                        → Captured {msg.capturedNoteIds.length} note
+                        {msg.capturedNoteIds.length > 1 ? "s" : ""}
+                      </div>
+                    )}
                   </div>
                 ))}
                 {aiLoading && (
